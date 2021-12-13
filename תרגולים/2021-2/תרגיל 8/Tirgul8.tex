@@ -1,0 +1,288 @@
+\documentclass{article}
+\usepackage{fontspec, fullpage}
+\usepackage{polyglossia}
+\usepackage{amsmath, amssymb, bbm, amsthm, graphicx}
+\setmainlanguage{hebrew}
+\setmainfont{Times New Roman}
+% \newfontfamily{\hebrewfont}{New Peninim MT}
+\begin{document}
+\title{תרגול 8 חשבון אינפיניטסימלי 1 שנת 2021/2}
+\author{ישראל הבר}
+\maketitle
+
+\newtheorem{theorem}{משפט}
+\newtheorem{exercise}{תרגיל}
+\newtheorem{homeexercise}{תרגיל לבית}
+\newtheorem{example}{דוגמה}
+\theoremstyle{definition}
+\newtheorem{definition}{הגדרה}
+\newtheorem{notation}{סימון}
+\newtheorem{claim}{טענה}
+\newtheorem{comment}{\emph{הערה}}
+\renewcommand\qedsymbol{$\blacksquare$}
+\newcommand{\limtoinfty}{\underset{n\rightarrow\infty}{\lim}}
+\newcommand{\limtur}{\overset{\infty}{\underset{n=1}{\sum}}}
+\newcommand{\limturstart}[1]{\overset{\infty}{\underset{n=#1}{\sum}}}
+\newcommand{\limsuptoinfty}{\underset{n\rightarrow\infty}{\limsup}}
+\newcommand{\liminftoinfty}{\underset{n\rightarrow\infty}{\liminf}}
+\newcommand{\limtoinftym}{\underset{m\rightarrow\infty}{\lim}}
+\newcommand{\limtop}{\underset{-}{\lim}}
+\newcommand{\limbottom}{\overset{-}{\lim}}
+\newcommand{\goesto}{\underset{n\rightarrow\infty}{\longrightarrow}}
+\newcommand{\goestom}{\underset{m\rightarrow\infty}{\longrightarrow}}
+\newcommand{\goesfrom}{\underset{n\rightarrow\infty}{\longleftarrow}}
+\newcommand{\funclim}[2]{\underset{#1\rightarrow#2}{\lim}}
+% \newcommand{\series}{_{n\in\mathbb{N}}}
+\newcommand{\series}[2]{\{#1\}_{#2\in\mathbb{N}}}
+
+\begin{exercise}
+קבעו התכנסות בתנאי/בהחלט/התבדרות של הטור הבא
+\[\limtur (-1)^{n+1}\frac{1}{n}\left(1+\frac{1}{n}\right)^n\]
+\end{exercise}
+
+\begin{proof}
+נבדוק קודם התכנסות בהחלט. כלומר למצוא אם הטור הבא מתכנס או לא
+\[\limtur \frac{1}{n}\left(1+\frac{1}{n}\right)^n\]
+נשים לב כי הסדרה מימין תהיה בערך 
+$e$
+לבסוף ולכן לפחות אינטואיטיביתכדאי להשוות עם 
+$\frac{1}{n}$
+כלומר 
+\[\frac{\frac{1}{n}\left(1+\frac{1}{n}\right)^n}{\frac{1}{n}}=\left(1+\frac{1}{n}\right)^n\goesto e\]
+ולכן ממבחן ההשוואה השני נקבל כי הטורים מתכנסים ומתבדרים יחדיו ולכן הטור של הערכים המוחלטים יתבדר. נרצה להשתמש בלייבניץ על מנת להראות התכנסות בתנאי. נשים לב כי
+\begin{align*}
+\frac{a_{n+1}}{a_n} &= \frac{\frac{1}{n+1}\left(1+\frac{1}{n+1}\right)^{n+1}}{\frac{1}{n}\left(1+\frac{1}{n}\right)^n} = \frac{\frac{1}{n+1}\left(\frac{n+2}{n+1}\right)^{n+1}}{\frac{1}{n}\left(\frac{n+1}{n}\right)^n} = \\ &= \frac{(n+2)^{n+1}\cdot n^{n+1}}{(n+1)^{2n+2}} = \left(\frac{n^2+2n}{n^2+2n+1}\right)^{n+1}<1
+\end{align*}
+ולכן הסדרה מונוטונית יורדת ולפי לייבניץ הטור יתכנס בתנאי.
+\end{proof}
+
+\begin{theorem}[קריטריון קושי]
+קריטריון קושי עובד גם עבור טורים מתכנסים - 
+\[\limtur a_n \text{ מתכנס} \Longleftrightarrow \forall\epsilon>0\quad\exists n_0\in\mathbb{N}\quad\forall n\geq n_0\geq\forall p\in\mathbb{N}:\quad|S_{n+p}-S_n|<\epsilon\]
+\end{theorem}
+
+\begin{exercise}
+יהי 
+$\limtur a_n$
+טור מתבדר. בנוסף לכך 
+\[\forall n\in\mathbb{N}:\quad a_n>0\]
+הוכח כי 
+\[\limtur \frac{a_n}{S_n}\]
+\end{exercise}
+מתבדר.
+
+\begin{proof}
+נניח בשלילה כי הטור מתכנס. לכן לפי קריטריון קושי 
+$\epsilon=\frac{1}{2}$
+קיים 
+$n_0\in\mathbb{N}$
+כך שלכל 
+$n\geq n_0$
+ולכל 
+$p\in\mathbb{N}$
+\[\left|\sum_{k=1}^{n+p}\frac{a_k}{S_k} - \sum_{k=1}^n \frac{a_k}{S_k}\right|=\left|\sum_{k=n+1}^{n+p}\frac{a_k}{S_k}\right|<\frac{1}{2}\]
+נשים לב כי סדרת הסכומים החלקיים עולה ממש ולכן ניתן לשמוט את הערכים המוחלטים בנוסף יתקיים 
+\[\frac{1}{S_{n+p}}\sum_{k=n+1}^{n+p} a_k\leq \sum_{k=n+1}^{n+p}\frac{a_k}{S_k}<\frac{1}{2}\]
+תשימו לב שמה שמופיע משמאל שווה לביטוי הבא
+\[\frac{S_{n+p}-S_n}{S_{n+p}}\]
+ולכן קיבלנו כי 
+\[\frac{S_{n+p}-S_n}{S_{n+p}}<\frac{1}{2}\]
+ולכן סך הכל
+\[\forall n\geq n_0\quad\forall p\in\mathbb{N}\quad S_{n+p}<2S_n\]
+אך מכיוון ש
+$S_n\goesto\infty$
+זאת סתירה (אפשר לחסום את הסדרה עם 
+$S_{n_0+1}$)
+\end{proof}
+
+\begin{theorem}[משפט אבל]
+תהי 
+$\series{a_n}{n}$
+סדרה מונוטונית וחסומה. יהי 
+$\limtur b_n$
+מתכנס. אזי 
+$\limtur a_nb_n$
+מתכנס.
+\end{theorem}
+
+\begin{exercise}
+בדקו אם הטור הבא מתכנס
+\[\limtur \frac{(-1)^{n+1}}{n}\sin\left(\frac{\pi}{n}\right)\left(1+\frac{1}{n}\right)^n\]
+\end{exercise}
+
+\begin{proof}
+ראינו כבר כי הטור 
+\[[\limtur \frac{(-1)^{n+1}}{n}\left(1+\frac{1}{n}\right)^n\]
+מתכנס. לכן מה שנשאר לראות זה שהסדרה 
+$\sin\left(\frac{\pi}{n}\right)$
+מונוטונית וחסומה. זה ברור כי סינוס תמיד חסומה. בנוסף לכך זה בתחום שבו סינוס מונוטונית עולה ולכן הסדרה מונוטונית יורדת. לכן ממשפט אבל הטור מתכנס.
+\end{proof}
+
+\begin{theorem}[משפט רימן]
+אם 
+$\limtur a_n$
+מתכנס בתנאי אז על ידי שינוי סדר איברים אפשר לקבל כל סכום 
+\[-\infty\leq S\leq \infty\]
+\end{theorem}
+
+\section{פונקציות}
+\begin{definition}[גבול]
+$L\in\mathbb{R}$
+נקרא גבול של הפונקציה 
+$f$
+בנקודה 
+$a\in\mathbb{R}$
+אם לכל סדרה 
+$\series{x_n}{n}$ 
+המקיימת 
+$a\neq x_n\goesto a$
+מתקיים 
+$\series{f(x_n)}{n}\goesto L$
+\end{definition}
+
+\begin{exercise}
+מצאו את הגבול הבא והוכיחו
+\[\underset{x\rightarrow 2}{\lim} \quad\frac{x+4}{x^2-6}\]
+\end{exercise}
+
+\begin{proof}
+נוכיח כי הגבול הוא 3-. תהי 
+$\series{x_n}{n}$
+כך ש 
+$2 \neq x_n\goesto 2$
+לפי אריתמטיקת של גבולות 
+\[f(x_n) = \frac{x_n+4}{x_n^2-6}\goesto \frac{2+4}{2^2-6} = -3\]
+\end{proof}
+
+\begin{exercise}
+תנו דוגמה לכך שהגבול 
+$\funclim{x}{\infty} f(x)$
+לא קיים אך הגבול 
+$\limtoinfty f(n)$
+קיים.
+\end{exercise}
+
+\begin{proof}
+ניקח 
+$x_n:=\frac{n}{2\pi}\goesto\infty$
+עם הפונקציה 
+$f(x)=\sin(2\pi x)$.
+
+\end{proof}
+
+\begin{comment}
+ההפך כמובן לא ייתכן לפי הגדרת הגבול של פונקציה.
+\end{comment}
+
+\begin{exercise}
+הוכיחו כי הגבול 
+\[\funclim{x}{0} \cos\left(\frac{1}{x}\right)\]
+אינו קיים.
+\end{exercise}
+
+\begin{proof}
+
+קודם ניתן להסתכל על הגרף של הפונקיה כדי לקבל טיפה אינטואיציה - 
+\begin{center}
+\includegraphics[scale=0.5]{./cos1divxGraph}
+\end{center}
+
+לפי הגדרה אם נמצא שתי סדרות 
+$\series{x_n}{n}, \series{y_n}{n}$
+שמתכנסות ל0 אך עבורם 
+\[\limtoinfty f(x_n)\neq \limtoinfty f(y_n)\]
+לכן אם לוקחים 
+\[x_n:=\frac{1}{2\pi n}\quad\quad y_n:=\frac{1}{\pi n +\frac{1}{2}\pi}\]
+כמובן שהסדרות האלו מתכנסות ל0, ואם נסתכל על הגבולות האחרים נקבל
+\begin{align*}
+\limtoinfty f(x_n)&=\limtoinfty\cos(2\pi n) = 1\\
+\limtoinfty f(y_n)&=\limtoinfty \cos\left(\pi n+\frac{1}{2}\pi\right) = 0
+\end{align*}
+ולכן לפי הגדרה הגבול של הפונקציה הנ"ל לא קיים.
+\end{proof}
+
+\begin{exercise}
+תהי 
+\[g(x):=\begin{cases} 2x-1, & x\in\mathbb{Q} \\ x^2 , & x\not\in \mathbb{Q}\end{cases}\]
+האם קיימות נקודות 
+$a\in\mathbb{R}$
+עבורן הגבול 
+\[\funclim{x}{a} g(x)\]
+\end{exercise}
+
+\begin{proof}
+
+\begin{center}
+\includegraphics[scale=0.6]{./gfunc}
+\end{center}
+
+
+לכל 
+$a\in\mathbb{R}$
+יש סדרה
+$a\neq \series{x_n}{n} \goesto a$ 
+עבור 
+$x_n\in\mathbb{Q}$.
+\par\noindent
+וגם קיימת סדרה 
+$a\neq \series{y_n}{n}\goesto a$
+כך ש 
+$y_n\in\mathbb{Q}$.
+\par\noindent 
+אם לפונקציה היה גבול היה מתקיים כי 
+\begin{align*}
+\limtoinfty f(x_n) &= \limtoinfty f(y_n)\\
+2a-1 &= a^2 \\ 
+a=1
+\end{align*}
+ולכן אין גבול לכל 
+$a\neq 1$.
+עבור 
+$a=1$
+מתקיים כי עבור כל סדרה שתתכנס ל 
+$a\in\mathbb{R}$
+ניתן לחלק ל2 תתי סדרות - אחת עבורה הערכים הם רציונליים והשנייה עבורה הערכים הם אי רציונליים. שתי התתי סדרות האלה (בהינתן שהן אינסופיות) יקבלו שהפונקציה עליהם תתכנס ל1. זה יכסה את כל האינדקסים שלנו ולכן גם הגבול של הסדרה המקורית תהיה 1 ובפרט לפי ההגדרה הגבול של הפונקציה קיים והוא 1. (נשים לב שהנחנו שהתתי סדרות הן אינסופיות אך אם הן לא זה כמובן גם בסדר. נתמקד בזנב של רק רציונליים או אי רציונליים וגם שם יתקיים שהסדרה המקורית תתכנס כמו שצריך.)
+\end{proof}
+
+\begin{definition}
+תהי פונקציה
+$f$
+המוגדרת בסביבה מנוקבת 
+$A$
+של 
+$a$.
+$L\in\mathbb{R}$
+נקרא הגבול של 
+$f$ 
+בנקודה 
+$a$
+אם:
+\[\forall\epsilon>0 \quad \exists \delta>0\quad\forall x\in A: 0<|x-a|<\delta \rightarrow |f(x)-L|<\epsilon\]
+ונסמן 
+$\funclim{x}{a} f(x)=L$
+\end{definition}
+\begin{comment}
+גבול לפי קושי שקול לגבול לפי היינה 
+\end{comment}
+
+\begin{exercise}
+הוכיחו לפי הגדרה כי 
+\[\funclim{x}{1} \frac{x-1}{x^2+5}\]
+\end{exercise}
+
+\begin{proof}
+יהי 
+$\epsilon>0 $.
+נחפש 
+$\delta>0$
+כך שאם 
+$0<|x-1|<\delta$,
+אזי 
+$|f(x)|<\epsilon$.
+נשים לב כי 
+\[|f(x)| = \left|\frac{x-1}{x^2+5}\right| \leq \frac{|x-1|}{5}\]
+ולכן אם נבחר איזשהו 
+$\delta<5\epsilon$
+נקבל גם את מה שצריך.
+\end{proof}
+\end{document}
