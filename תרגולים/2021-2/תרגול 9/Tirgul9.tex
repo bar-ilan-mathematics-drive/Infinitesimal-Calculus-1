@@ -1,0 +1,285 @@
+\documentclass{article}
+\usepackage{fontspec, fullpage}
+\usepackage{polyglossia}
+\usepackage{amsmath, amssymb, bbm, amsthm, graphicx}
+\setmainlanguage{hebrew}
+\setmainfont{Times New Roman}
+% \newfontfamily{\hebrewfont}{New Peninim MT}
+\begin{document}
+\title{תרגול 9 חשבון אינפיניטסימלי 1 שנת 2021/2}
+\author{ישראל הבר}
+\maketitle
+
+\newtheorem{theorem}{משפט}
+\newtheorem{exercise}{תרגיל}
+\newtheorem{homeexercise}{תרגיל לבית}
+\newtheorem{example}{דוגמה}
+\theoremstyle{definition}
+\newtheorem{definition}{הגדרה}
+\newtheorem{notation}{סימון}
+\newtheorem{claim}{טענה}
+\newtheorem{comment}{\emph{הערה}}
+\renewcommand\qedsymbol{$\blacksquare$}
+\newcommand{\limtoinfty}{\underset{n\rightarrow\infty}{\lim}}
+\newcommand{\limtur}{\overset{\infty}{\underset{n=1}{\sum}}}
+\newcommand{\limturstart}[1]{\overset{\infty}{\underset{n=#1}{\sum}}}
+\newcommand{\limsuptoinfty}{\underset{n\rightarrow\infty}{\limsup}}
+\newcommand{\liminftoinfty}{\underset{n\rightarrow\infty}{\liminf}}
+\newcommand{\limtoinftym}{\underset{m\rightarrow\infty}{\lim}}
+\newcommand{\limtop}{\underset{-}{\lim}}
+\newcommand{\limbottom}{\overset{-}{\lim}}
+\newcommand{\goesto}{\underset{n\rightarrow\infty}{\longrightarrow}}
+\newcommand{\goestom}{\underset{m\rightarrow\infty}{\longrightarrow}}
+\newcommand{\goesfrom}{\underset{n\rightarrow\infty}{\longleftarrow}}
+\newcommand{\funclim}[2]{\underset{#1\rightarrow#2}{\lim}\,}
+% \newcommand{\series}{_{n\in\mathbb{N}}}
+\newcommand{\series}[2]{\{#1\}_{#2\in\mathbb{N}}}
+
+\begin{theorem}
+תהי פונקציה 
+$f$
+המוגדרת בסביסה מנוקבת 
+$A$
+של 
+$a$.
+\par\noindent
+$L\in\mathbb{R}$
+נקרא הגבול של 
+$f$
+בנקודה 
+$a$
+אם:
+\[\forall\epsilon>0\quad\exists\delta>0\quad \forall x\in A: \quad 0<|x-a|<\delta\longrightarrow |f(x)-L|<\epsilon\]
+ונסמן 
+\[\funclim{x}{a} f(x) = L\]
+\end{theorem}
+
+\begin{comment}
+גבול לפי קושי שקול לגבול לפי היינה.
+\end{comment}
+
+\begin{definition}
+עוד הגדרות של גבולות - 
+\begin{enumerate}
+\item נאמר ש
+$\funclim{x}{a} = -\infty$
+בסביבה מנוקבת 
+$A$
+של 
+$a$
+אם 
+\[\forall m<0\quad\exists \delta>0\quad\forall x\in A:\quad 0<|x-a|<\delta\longrightarrow f(x)<m\]
+\item נאמר כי 
+$\funclim{x}{\infty} f(x) = L$
+אם 
+\[\forall\epsilon>0\quad\exists M>0:\quad x>M \longrightarrow |f(x)-L|<\epsilon\]
+\item 
+נאמר כי 
+$\funclim{x}{-\infty} f(x) = L$
+אם 
+\[\forall\epsilon>0\quad\exists M>0:\quad x<M \longrightarrow |f(x)-L|<\epsilon\]
+\end{enumerate}
+\end{definition}
+
+\begin{exercise}
+הוכיחו לפי הגדרה 
+\[\funclim{x}{-\infty}\frac{x+5}{2x+3}=\frac{1}{2}\]
+\end{exercise}
+
+\begin{proof}
+\[\forall\epsilon>0\quad \exists m<0: \quad x<m\longrightarrow\left|f(x)-\frac{1}{2}\right|<\epsilon\]
+
+יהי 
+$\epsilon>0$
+נשים לב כי אנחנו רוצים 
+\[\left|\frac{x+5}{2x+3}-\frac{1}{2}\right|= \left|\frac{7}{4x+6}\right|<\epsilon\]
+אנחנו רוצים שאם 
+$x<m$
+יתקיים הביטוי הקודם. אם מקטינים את האיקס במשוואה נקבל שהביטוי קטן ולכן עבור 
+$m<-\frac{6}{4}$
+יתקיים שצריך שיתקיים 
+\[\frac{7}{-4m-6}<\epsilon\]
+וזה יהיה שקול ל 
+\[m<-\frac{1}{4}\left(\frac{7}{\epsilon}+6\right)\]
+ולכן סך הכל ניקח 
+\[m<\min\left\{-\frac{1}{4}\left(\frac{7}{\epsilon} +6\right), -\frac{3}{2}\right\}\]
+\end{proof}
+
+\begin{exercise}
+הוכיחו לפי הגדרה 
+\[\funclim{x}{1}\frac{x^2+1}{(x-1)^2}=\infty\]
+\end{exercise}
+
+\begin{proof}
+צריך להראות כי 
+\[\forall M>0\quad \exists \delta>0:\quad 0<|x-1|<\delta\longrightarrow f(x)>M\]
+לכן יהי 
+$M>0$
+ונחפש 
+$\delta>0$
+מתאים. 
+\[\frac{x^2+1}{(x-1)^2}>M\]
+אך נשים לב כי אם 
+$0<|x-1|<\delta$ 
+יתקיים כי 
+$|x-1|^2<\delta^2$
+ולכן 
+\[f(x)>\frac{x^2+1}{\delta^2}>\frac{1}{\delta^2}\]
+ונרצה למצוא 
+$\delta>0$
+כך ש 
+$f(x)> M$
+ולכן ניקח 
+\[\delta<\frac{1}{\sqrt{M}}\]
+\end{proof}
+
+\begin{exercise}
+חשבו 
+\[\funclim{x}{2} \frac{x^3-8}{x-2}\]
+\end{exercise}
+
+\begin{proof}
+נשים לב כי 
+\[x^3-8 = (x-2)(x^2+2x+4)\]
+ולכן עבור 
+$x\neq 2$
+יתקיים 
+\[\frac{x^3-8}{x-2} = x^2+2x+4\]
+ולכן מאריתמטיקת של גבולות נקבל כי הגבול הוא 12.
+\end{proof}
+
+\section{גבולות חד צדדיים}
+נשים לב כי למשל עבור 
+$f(x)=\sqrt{x}$
+מוגדרת רק עבור 
+$x\geq 0$
+ולכן אם למשל נרצה להגדיר גבול של הפונקציה ב0 נצטרך הגדרות חדשות - לפי קושי 
+\begin{enumerate}
+\item 
+$\funclim{x}{x_0^{+}}f(x) = L$
+אם 
+\[\forall\epsilon>0\quad\exists\delta>0:\quad 0<x-x_0<\delta\longrightarrow |f(x)-L|<\epsilon\]
+\item $\funclim{x}{x_0^{+}}f(x) = L$
+אם 
+\[\forall\epsilon>0\quad\exists\delta>0:\quad 0<x_0-x<\delta\longrightarrow |f(x)-L|<\epsilon\]
+\end{enumerate}
+
+\begin{exercise}
+חקרו את הגבולות החד צדדיים של 
+\[f(x)=\frac{\sqrt{x^2-9}}{|x-3|}\text{ עבור }x_0=3\]
+\end{exercise}
+
+\begin{proof}
+נשים לב כי עבור סביבה מנוקבת שמאלית של 3 הפונקציה לא מוגדרת ולכן אין עבורה גבול חד צדדי. נחשב עבור סביבה מנוקבת ימנית 
+\[\funclim{x}{3^+}\frac{\sqrt{x^2-9}}{|x-3|} = \funclim{x}{3^+}\frac{\sqrt{x+3}}{\sqrt{x-3}} = \infty \left("=\frac{6}{\infty}"\right)\]
+\end{proof}
+
+\newpage
+
+\begin{theorem}
+הגבול של הפונקציה בנקודה קיים אם ורק אם הגבולות החד צדדיים קיימים ושווים.
+\end{theorem}
+
+\begin{exercise}
+חשבו את 
+$\funclim{x}{0} \sin(x)$
+\end{exercise}
+
+\begin{proof}
+קודם נתבונן בציור הבא - 
+\begin{center}
+\includegraphics[scale=0.5]{./images/SimpleSinGraph}
+\end{center}
+כאשר הגובה הוא פונקציית סינוס והקשת היא 
+$x$. 
+ניתן לראות מכאן כי עבור התחום 
+$0<x<\frac{1}{2}\pi$
+נקבל כי 
+\[0<\sin(x)<x\]
+ולכן מסנדוויץ' נקבל כי 
+\[\funclim{x}{0^+} \sin(x) = 0\]
+עכשיו עבור התחום 
+$-\frac{\pi}{2}<x<0$
+נקבל כי 
+$\sin(-x)=-\sin(x)$
+ולכן בחישוב הגבול נקבל גם כי 
+\[\funclim{x}{0^-} \sin(x) = 0\]
+סך הכל נקבל כי 
+\[\funclim{x}{0}\sin(x) = 0\]
+\end{proof}
+
+\begin{exercise}
+חשבו 
+$\funclim{x}{0}\frac{\sin(x)}{x}$
+\end{exercise}
+
+\begin{proof}
+נצייר מחדש עם הוספה חשובה 
+\begin{center}
+\includegraphics[scale=0.6]{./images/NextSinGraph}
+\end{center}
+נשים לב כי זה גורר שבתחום 
+$0<x<\frac{1}{2}\pi$
+יתקיים אז 
+\[\frac{1}{2}\sin(x)<\frac{1}{2}\sin(x)<\frac{1}{2}\tan(x)\]
+עבור הגבול החד צדדי הימני נקבל כי ניתן לחלק ב 
+$\sin(x)$
+ולכן 
+\[1<\frac{x}{\sin x}<\frac{1}{\cos x}\]
+ולכן לפי סנדוויץ' נקבל כי 
+\[\funclim{x}{0^+}\frac{x}{\sin x} = 1\]
+נשים לב כי הפונקציה זוגית ולכן נקבל כי 
+\[\funclim{x}{0^-}\frac{x}{\sin x} = 1\]
+בפרט הגבול קיים ושווה 1.
+ולכן גם עבור המקורי הגבול יהיה 1.
+\end{proof}
+
+\section{רציפות}
+\begin{definition}
+פונקציה 
+$f$
+רציפה בנקודה 
+$x_0\in\mathbb{R}$
+אם הגבול בנקודה קיים ומקיים 
+\[f(x_0) = \funclim{x}{x_0} f(x)\]
+\end{definition}
+
+\begin{exercise}
+הוכיחו כי פונקציית הסינוס רציפה בכל נקודה.
+\end{exercise}
+
+\begin{proof}
+נשים לב כי זה שקול להראות ש 
+\[\funclim{h}{0} \sin(x_0+h) = \sin(x_0)\]
+נפתח את הביטוי מימין - 
+\[\sin(x_0+h) = \sin(x_0)\cos(h) + \sin(h)\cos(x_0)\]
+כשנפעיל את הקבול המתאים נקבל כי 
+\[\funclim{h}{0}\sin(x_0+h) = \sin x_0\cdot 1+\cos x_0\cdot 0 = \sin(x_0) \]
+לכן הפונקציה רציפה לכל נקודה 
+$x_0\in\mathbb{R}$.
+\end{proof}
+
+\begin{exercise}
+מצאו 
+$a,b\in\mathbb{R}$
+כך ש 
+\[f(x) = \begin{cases}-2\sin x,& x\leq-\frac{1}{2}\pi \\ a\sin x + b,& -\frac{\pi}{2}<x\leq\frac{1}{2}\pi \\ \cos x,& x>\frac{1}{2}\pi\end{cases}\]
+רציפה בכל נקודה.
+\end{exercise}
+
+\begin{proof}
+נשים לב כי בתוך התחומים האלה ממש הפונקציות רציפות. לכן ק' צריך לוודא עבור "נקודות החיתוך". נשים לב כי 
+
+\begin{align*}
+\funclim{x}{-\left(\frac{1}{2}\pi\right)^-} f(x) &= -2\sin\left(-\frac{1}{2}\pi\right)=2 \\
+\funclim{x}{\left(-\frac{1}{2}\pi\right)^+} f(x) &= a\sin\left(-\frac{\pi}{2}\right) + b = b-a \\
+\funclim{x}{\left(\frac{1}{2}\pi\right)^-} f(x) &= a\sin\left(\frac{\pi}{2}\right) + b = a+b \\
+\funclim{x}{\left(\frac{1}{2}\pi\right)^+} f(x) = 0
+\end{align*}
+מזה נקבל שהפונקציה רציפה אם ורק אם מערכת המשוואות הבאה מתקיימת 
+\[\begin{cases} b-a&=2 \\ a+b&=0\end{cases}\]
+כלומר אם ורק אם 
+\[a=-1, \quad b=1 \]
+\end{proof}
+
+\end{document}
