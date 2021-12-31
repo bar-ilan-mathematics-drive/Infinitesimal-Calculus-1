@@ -1,0 +1,326 @@
+\documentclass{article}
+\usepackage{fontspec, fullpage}
+\usepackage{polyglossia}
+\usepackage{amsmath, amssymb, bbm, amsthm, graphicx}
+\setmainlanguage{hebrew}
+\setmainfont{Times New Roman}
+% \newfontfamily{\hebrewfont}{New Peninim MT}
+\begin{document}
+\title{תרגול 10 חשבון אינפיניטסימלי 1 שנת 2021/2}
+\author{ישראל הבר}
+\maketitle
+
+\newtheorem{theorem}{משפט}
+\newtheorem{lemma}{למה}
+\newtheorem{exercise}{תרגיל}
+\newtheorem{homeexercise}{תרגיל לבית}
+\newtheorem{example}{דוגמה}
+\theoremstyle{definition}
+\newtheorem{definition}{הגדרה}
+\newtheorem{notation}{סימון}
+\newtheorem{claim}{טענה}
+\newtheorem{comment}{\emph{הערה}}
+\renewcommand\qedsymbol{$\blacksquare$}
+\newcommand{\limtoinfty}{\underset{n\rightarrow\infty}{\lim}}
+\newcommand{\limtur}{\overset{\infty}{\underset{n=1}{\sum}}}
+\newcommand{\limturstart}[1]{\overset{\infty}{\underset{n=#1}{\sum}}}
+\newcommand{\limsuptoinfty}{\underset{n\rightarrow\infty}{\limsup}}
+\newcommand{\liminftoinfty}{\underset{n\rightarrow\infty}{\liminf}}
+\newcommand{\limtoinftym}{\underset{m\rightarrow\infty}{\lim}}
+\newcommand{\limtop}{\underset{-}{\lim}}
+\newcommand{\limbottom}{\overset{-}{\lim}}
+\newcommand{\goesto}{\underset{n\rightarrow\infty}{\longrightarrow}}
+\newcommand{\goestom}{\underset{m\rightarrow\infty}{\longrightarrow}}
+\newcommand{\goesfrom}{\underset{n\rightarrow\infty}{\longleftarrow}}
+\newcommand{\funclim}[2]{\underset{#1\rightarrow#2}{\lim}\,}
+% \newcommand{\series}{_{n\in\mathbb{N}}}
+\newcommand{\series}[2]{\{#1\}_{#2\in\mathbb{N}}}
+
+\begin{exercise}
+\textbf{הוכח או הפרך:}
+\begin{enumerate}
+\item אם 
+$f\neq g$
+לא רציפות בנקודה 
+$x_0$
+אז גם 
+$f(x)+g(x)$
+לא רציפה בנקודה זו.
+\item אם 
+$f\neq g$
+לא רציפות בנקודה 
+$x_0$
+אז גם 
+$f(x)\cdot g(x)$
+\end{enumerate}
+\end{exercise}
+
+\begin{proof}
+\begin{enumerate}
+\item \textbf{הפרכה} \par\noindent
+ניקח למשל 
+\[f(x)=\begin{cases}\frac{1}{x}, & x\neq 0 \\ 1, & x=0\end{cases},\quad g(x) = -f(x)\]
+נשים לב כי 2 הפונקציות הנל לא רציפות בבנקודה 
+$x_0=0$
+אך 
+\[g(x)+f(x) = 0\]
+רציפה בנקודה זו.
+\item \textbf{הפרכה}\par \noindent
+ניקח 
+\[f(x):=\begin{cases}1, &x\neq 3\\ -1, &x=3\end{cases},\quad g(x):=\begin{cases}-1, & x\neq 3 \\ 1, & x=3 \end{cases}\]
+\end{enumerate}
+\end{proof}
+
+\section{מיון נקודות אי רציפות}
+יש כמה אפשרויות ללמה הפונקציה לא רציפה בנקודה מסויימת - 
+\begin{itemize}
+\item 
+$a$
+\textbf{נקודת אי רציפת סליקה: }
+\par\noindent
+הגבול קיים אך הערך של הפונקציה לא שווה לגבול בנקודה זו (או שהפונקציה לא מוגרת בנקודה זו.)
+\item 
+$a$
+\textbf{נקודת אי רציפות קפיצה: }
+\par\noindent
+אם הגבולות החד צדדיים קיימים אך שונים. 
+\item 
+$a$
+\textbf{נקודת אי רציפות מסוג שני: }
+\par \noindent
+לפחות אחד מהגבולות החד צדדיים לא קיים.
+\end{itemize}
+
+\begin{exercise}
+מיינו את נקודות האי רציפות של הפונקציה הבאה 
+\[f(x) = \frac{\frac{1}{x} - \frac{1}{x+1}}{\frac{1}{x-1}-\frac{1}{x}}\]
+\end{exercise}
+
+\begin{proof}
+נשים לב כי (כאשר הכל מוגדר)
+\[f(x) = \frac{\frac{1}{x} - \frac{1}{x+1}}{\frac{1}{x-1}-\frac{1}{x}} = \frac{(x-1)x}{x(x+1)}\]
+עכשיו צריך לאפיין את הנקודות הרגישות. נשים לב כי בהגדרת הפונקציה הנקודות האלה הן 
+$x\in\{0, \pm 1\}$. 
+\begin{itemize}
+\item $\textbf{x=0:}$ \par\noindent
+נשים לב כי 
+\[\funclim{x}{0}\frac{x(x-1)}{x(x+1)} = -1\]
+ולכן הגבולות החד צדדיים קיימים ושווים, מכיוון שהפונקציה אינה מוגדרת בנקודה זו נקבל שזאת נקודה אי רציפות סליקה.
+\item $\textbf{x=1:}$ \par\noindent
+נשים לב כי 
+\[\funclim{x}{1}\frac{x(x-1)}{x(x+1)} = 0\]
+מאותן סיבות זו נקודת אי רציפות סליקה. 
+\item $\textbf{x=-1:}$ \par\noindent
+נשים לב כי 
+\begin{align*}
+\funclim{x}{-1^-} f(x) &= -\frac{2}{0} = \infty \\
+\funclim{x}{-1^+} f(x) &= \frac{-2}{0} = -\infty
+\end{align*}
+ובפרט הגבולות החד צדדיים לא קיימים ולכן זו נקודת אי רציפות מסוג שני. 
+\end{itemize}
+\end{proof}
+
+\begin{exercise}
+מיינו את נקודת האי-רציפות של הפונקציה 
+\[f(x):=\sin\left(\frac{1}{\log(x^2)}\right)\]
+\end{exercise}
+
+\begin{proof}
+צריך לאפיין את נקודות הרגישות של הפונקציה. נשים לב כי יכל להיות שנציב 0 בלוג שזה לא מוגדר, או שנקבל 
+$\log(x^2) = 0$. 
+לכן סך הכל הנקודות הבעייתיות הן 
+$x = \pm 1$
+לכן נחלק למקרים המתאימים 
+\begin{itemize}
+\item $\textbf{x=0:}$
+\[\funclim{x}{0} \log x^2 = -\infty \Rightarrow \funclim{x}{0} \frac{1}{\log x^2} = 0 \Rightarrow \funclim{x}{0} \sin\left(\frac{1}{\log(x^2)}\right) = 0\]
+ולכן הגבולות החד צדדיים קיימים ושווים אך הפונקציה אינה מוגדרת בנקודה ולכן זאת נקודת אי רציפות סליקה. 
+\item $\textbf{x=1:}$
+ניקח את הסדרות הבאות - 
+\begin{align*}
+x_n &= \sqrt{e^{1/\left(0.5\pi +2\pi n\right)}} \\
+y_n &= \sqrt{e^{1/\left(-0.5\pi +2\pi n\right)}}
+\end{align*}
+נשים לב כי הסדרות האלה מתכנסות ל1 אך 
+\[f(x_n)\goesto 1,\quad f(y_n)\goesto -1\]
+ולכן הגבול החד צדדי לא קיים ובפרט זו נקודת אי רציפות מסוג 2. בדומה עבור המקרה 
+$x=-1$.
+\end{itemize}
+\end{proof}
+\newpage
+\begin{theorem}[ערך הביניים]
+תהי 
+$f$
+פונקציה רציפה בקטע 
+$[a, b]$
+ויהי 
+$y_0$
+ערך המקיים 
+$f(x)\leq y_0\leq f(b)$.
+קיימת 
+$x_0\in[a, b]$
+כך ש 
+$f(x_0)=y_0$
+\end{theorem}
+
+\begin{exercise}
+תהי 
+$f$
+פונקציה רציפה ב 
+$[0,2]$
+כך ש 
+$f(2)=3$.
+הוכח שקיים 
+$x_0\in [0, 2]$
+כך ש 
+$f(x_0)=\frac{1}{x_0}$
+\end{exercise}
+
+\begin{proof}
+נגדיר 
+$h(x)=x f(x)$.
+נשים לב כי 
+$h(0)=0, h(2)=6$. 
+הפונקציה רציפה בקטע ולכן לפי משפט ערך הביניים יש ערך 
+$x_0$
+כך ש 
+$h(x_0)=1$. 
+ולכן 
+$f(x_0)x_0 = 1$
+ולכן 
+\[f(x_0)=\frac{1}{x_0}\]
+\end{proof}
+
+\begin{exercise}
+תהיינה 
+$f,g$
+פונקציות רציפות בקטע 
+$[0, 1]$
+המקיימות 
+\[g([0, 1])=[0, 1], \quad f([0, 1])\subseteq [0,1]\]
+הוכיחו כי קיימת נקודה 
+$x_0$
+כך ש 
+$f(x_0)=g(x_0)$.
+\end{exercise}
+
+\begin{proof}
+נגדיר 
+$h(x):=f(x)-g(x)$. 
+$h$
+רציפה ב 
+$[0, 1]$
+כחיסור של רציפות. קיימים 
+$x_1\neq x_2$
+כך ש 
+$g(x_1)=1, g(x_2)=0$. 
+נשים לב כי מהנתון 
+$f(x_2)\leq 1, f(x_1)\geq 0$. 
+ולכן 
+\begin{align*}
+h(x_1)&=f(x_1)-g(x_1)=f(x_1)-1\leq 0\\
+h(x_2)&=f(x_2)-g(x_2)=f(x_2)-0\geq 0 
+\end{align*}
+בלי הגבלת הכלליות 
+$x_1<x_2$.
+$h$
+רציפה ב 
+$[x_1, x_2]$. 
+ולכן לפי משפט ערך הביניים יש 
+$x_0\in [x_1,x_2]\subseteq [0, 1]$
+כך ש - 
+\[h(x_0)=0\Rightarrow f(x_0)-g(x_0) = 0\Rightarrow f(x_0)=g(x_0)\]
+\end{proof}
+
+\begin{theorem}[ויירשטראס]
+פונקציה רציפה בקטע סגור מקבלת בו מינימום ומקסימום.
+\end{theorem}
+
+\begin{exercise}
+נתונות 2 פונקציות 
+$f,g$
+רציפות ב 
+$[0, 1]$
+ומתקיים 
+\[\sup\{f(x)\mid x\in [0, 1]\} = \sup\{g(x)\mid x\in [0, 1]\}\]
+הוכיחו שקיימת נקודה 
+$x\in [0, 1]$
+ כך ש- 
+$g(x_0)=f(x_0)$.
+\end{exercise}
+
+\begin{proof}
+לפי ויירשטראס הסופרימום הנ"ל קיים ולכן נסמן אותו ב
+$M$. 
+\[M=\underset{x\in[0, 1]}{\sup \{f(x)\}}=\underset{x\in[0, 1]}{\sup \{g(x)\}}\]
+כאשר קיימות 
+$x_1, x_2\in [0, 1]$
+כך ש- 
+\[f(x_1)=M, g(x_2)=M\]
+נגדיר 
+$h(x):=f(x)-g(x)$.
+נשים לב כי 
+$h$
+רציפה ב- 
+$[0, 1]$
+כחיסור רציפות. לכן 
+\begin{align*}
+h(x_1)&= f(x_1)-g(x_1) = M-g(x_1)\geq 0 \\
+h(x_2)&= f(x_2)-g(x_2) = f(x_2)-M\leq 0 
+\end{align*}
+בדומה לתרגיל הקודם יהיה 
+$x_1<x_0<x_2$
+כך ש 
+$h(x_0)=0$.
+ולכן נקבל 
+$f(x_0)=g(x_0)$.
+\end{proof}
+
+\begin{lemma}
+תהי 
+$f:X\longrightarrow Y$
+פונקציה עולה ממש, רציפה ועל. לכל נקודה 
+$x\in X$
+שהיא נקודת הצטברות מימין/משמאל של הקבוצה 
+$X$
+אזי הנקודה 
+$y:=f(x)\in Y$
+היא נקודת הצטברות מימין/משמאל של הקבוצה 
+$Y$
+בהתאמה. 
+\end{lemma}
+
+\begin{proof}
+נוכיח עבור גבול משמאל ונשאיר את המקרה עבור הגבול מימין שהוא על אותו עיקרון. נניח שיש סדרה עולה ממש ב 
+$X$
+- 
+$\series{x_n}{n}$
+כך ש 
+$x_n\goesto x$. 
+מרציפות הפונקציה 
+$f(x_n)\goesto f(x) = y$. 
+כיוון ש 
+$f$
+עולה ממש, אזי 
+$f(x_n)<y$
+לכל 
+$n\in\mathbb{N}$.
+ולכן 
+$y$
+נקודת הצטברות משמאל של 
+$Y$.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
