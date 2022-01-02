@@ -1,0 +1,240 @@
+\documentclass{article}
+\usepackage{fontspec, fullpage}
+\usepackage{polyglossia}
+\usepackage{amsmath, amssymb, bbm, amsthm, graphicx}
+\setmainlanguage{hebrew}
+\setmainfont{Times New Roman}
+% \newfontfamily{\hebrewfont}{New Peninim MT}
+\begin{document}
+\title{תרגול 11 חשבון אינפיניטסימלי 1 שנת 2021/2}
+\author{ישראל הבר}
+\maketitle
+
+\newtheorem{theorem}{משפט}
+\newtheorem{lemma}{למה}
+\newtheorem{exercise}{תרגיל}
+\newtheorem{homeexercise}{תרגיל לבית}
+\newtheorem{example}{דוגמה}
+\theoremstyle{definition}
+\newtheorem{definition}{הגדרה}
+\newtheorem{notation}{סימון}
+\newtheorem{claim}{טענה}
+\newtheorem{comment}{\emph{הערה}}
+\renewcommand\qedsymbol{$\blacksquare$}
+\newcommand{\limtoinfty}{\underset{n\rightarrow\infty}{\lim}}
+\newcommand{\limtur}{\overset{\infty}{\underset{n=1}{\sum}}}
+\newcommand{\limturstart}[1]{\overset{\infty}{\underset{n=#1}{\sum}}}
+\newcommand{\limsuptoinfty}{\underset{n\rightarrow\infty}{\limsup}}
+\newcommand{\liminftoinfty}{\underset{n\rightarrow\infty}{\liminf}}
+\newcommand{\limtoinftym}{\underset{m\rightarrow\infty}{\lim}}
+\newcommand{\limtop}{\underset{-}{\lim}}
+\newcommand{\limbottom}{\overset{-}{\lim}}
+\newcommand{\goesto}{\underset{n\rightarrow\infty}{\longrightarrow}}
+\newcommand{\goestom}{\underset{m\rightarrow\infty}{\longrightarrow}}
+\newcommand{\goesfrom}{\underset{n\rightarrow\infty}{\longleftarrow}}
+\newcommand{\funclim}[2]{\underset{#1\rightarrow#2}{\lim}\,}
+% \newcommand{\series}{_{n\in\mathbb{N}}}
+\newcommand{\series}[2]{\{#1\}_{#2\in\mathbb{N}}}
+
+\section{פתרון הבוחן}
+\begin{exercise}
+תהי 
+$\series{a_n}{n}$.
+הוכיחו שאם לכל 
+$\epsilon>0$
+קיימים 
+$M,N$
+כך שלכל 
+$m>M, n>N$
+מתקיים 
+$|a_n-a_{m+n}|<\epsilon$,
+הסדרה 
+$a_n$
+מתכנסת.
+\end{exercise}
+
+\begin{proof}
+יהי 
+$\epsilon>0$
+על פי הנתון 
+\[\exists M>0, \,N>0\forall n>N\quad \forall m>M: |a_n-a_{n+m}|<\epsilon\]
+זה כמובן נותן גם כי 
+\[\exists M>0, \,N>0\forall n>N\quad \forall m>M\quad\forall k>0: |a_n-a_{n+m+k}|<\epsilon\]
+יהיו 
+$k_1, k_2>0$
+אזי 
+\[|a_n-a_{n+m+k_1}|,|a_n-a_{n+m+k_2}|<\epsilon\]
+נשתמש באי שיוויון המשולש כדי לקבל 
+\[|a_{n+m+k_1} - a_{n+m+k_2}| = |a_{n+m+k_1} - a_n| + | a_{n+m+k_2}-a_n|<\epsilon+\epsilon = 2\epsilon\]
+סך הכל נשים לב שזה אומר כי 
+\[\forall c_1,c_2>N+M+2:\quad |a_{c_1} - a_{c_2}|<2\epsilon\]
+יהי 
+$\epsilon_1>0$
+ניקח 
+$\epsilon = \frac{\epsilon_1}{2}$
+לפי מה שמצאנו 
+\[\exists N' \in\mathbb{N} \quad\forall n,m>N:\quad |a_n-a_m|<\epsilon_1\]
+נשים לב שזה תנאי קושי להתכנסות סדרות ולכן הסדרה מתכנסת
+\end{proof}
+
+\bigskip
+
+\begin{exercise}
+\begin{enumerate}
+\item 
+נתונים שני טורים חיוביים 
+$\limtur a_n, \limtur b_n$
+ו 
+$n_0\in\mathbb{N}$
+כך שלכל 
+$n\geq n_0$
+\[\frac{a_{n+1}}{a_n}\leq \frac{b_{n+1}}{b_n}\]
+הראו כי אם 
+$\limtur b_n$
+מתכנס אזי גם 
+$\limtur a_n$
+מתכנס.
+\item 
+מצאו התבדרות או התכנסות של הטור הבא 
+\[\limtur \frac{n^{n-2}}{e^n n!}\]
+\end{enumerate}
+\end{exercise}
+
+\begin{proof}
+\begin{enumerate}
+\item 
+נוכל להניח כי 
+$n_0=1$
+בגלל שהתכנסות טורים תלויה אך ורק בהתכנסות הזנב. לכן מתקיים
+\[\forall n\in\mathbb{N}:\quad \frac{a_{n+1}}{a_n}\leq \frac{b_{n+1}}{b_n}\]
+נשים לב שזה אומר שבגלל שהטורים חיוביים
+\[\forall n\in\mathbb{N}:\quad 0<\frac{a_{n+1}}{b_{n+1}}\leq \frac{a_n}{b_n}\]
+לכן נקבל שהסדרה 
+$\series{\frac{a_n}{b_n}}{n}$
+היא סדרה מונוטונית יורדת, וכמובן חסומה מלרע על ידי 0. לכן הסדרה מתכנסת ל 
+$0\leq L\leq\frac{a_1}{b_1}$.
+לכן לבסוף 
+\[0<\frac{a_n}{b_n}<L+ 1\]
+ולכן לבסוף 
+\[0<a_n<(L+1)b_n\]
+מכיוון שהטור 
+$\limtur b_n$
+מתכנס גם 
+$\limtur (L+1) b_n$
+מתכנס. ממבחן ההשוואה הראשון נקבל כי הטור
+$\limtur a_n$ 
+
+מתכנס.
+\item 
+נסמן 
+\[a_n = \frac{n^{n-2}}{e^n n!}\]
+
+נשים לב כי 
+\begin{align*}
+0<\frac{a_{n+1}}{a_n} &=\frac{\frac{(n+1)^{n-1}}{e^{n+1}(n+1)!}}{\frac{n^{n-2}}{e^n\cdot n!}} = \frac{e^n}{e^{n+1}} \cdot \frac{(n+1)^{n-1}}{n^{n-2}}\cdot \frac{n!}{(n+1)!}=e^{-1}\frac{1}{n+1}\frac{(n+1)^{n-1}}{n^{n-2}} \\ 
+&= e^{-1} \left(1+\frac{1}{n}\right)^n \left(\frac{n+1}{n}\right)^{-2} 
+\end{align*}
+ראינו כבר הרצאה כי 
+$\left(1+\frac{1}{n}\right)^n\leq e$
+ולכן נקבל כי 
+\[\frac{a_{n+1}}{a_n}\leq \frac{n^2}{(n+1)^2} = \frac{\frac{1}{(n+1)^2}}{\frac{1}{n^2}} \]
+לכן נשים לב שאם נסמן 
+$b_n:=n^{-2}$
+נקבל כי 
+\[\frac{a_{n+1}}{a_n}\leq \frac{b_{n+1}}{b_n}\]
+ולכן מכיוון שטורים אלה חיוביים נקבל מסעיף א שאם הטור 
+$\limtur b_n$
+מתכנס אזי גם 
+$\limtur a_n$ 
+יתכנס כנדרש. אך נשים לב שראינו בהרצאה כי הטור 
+$\limtur b_n$
+מתכנס. לכן גם הטור המקורי שלנו יתכנס. 
+
+\end{enumerate}
+\end{proof}
+
+\newpage
+
+\begin{exercise}
+\begin{enumerate}
+\item 
+תהי 
+$\series{a_n}{n}$
+ותהיינה 
+$\series{a_{m_n}}{n}, \series{a_{k_n}}{n}$
+תתי סדרות שמכסות את כל הסדרה ו 
+\[a_{m_n}\goesto a, \quad\quad a_{k_n}\goesto b\]
+אפיינו את כל הגבולות החלקיים של 
+$a_n$.
+\item 
+מצאו את כל הגבולות החלקיים של הסדרה הבאה 
+\[\begin{cases}(-1)^{n/2}\frac{n}{n+1}, & n=2k \\ \sqrt[n]{\left(\left(1+\frac{1}{n}\right)^n\right)^n + 2^n}+\frac{\sin}{n}, & n=2k-1\end{cases}\]
+מותר להשתמש בסעיף א לכל כמות סופית של תתי סדרות מתאימות בלי צורך להוכיח.
+\end{enumerate}
+\end{exercise}
+
+\begin{proof}
+\begin{enumerate}
+\item 
+יהי גבול חלקי 
+$c$
+של הסדרה. ניקח תת סדרה המתכנסת לגבול החלקי הזה. נשים לב כי מלפחות אחת התתי סדרות 
+\[\series{a_{m_n}}{n}, \series{a_{k_n}}{n}\]
+מופיעות אינסוף איברים בתת סדרה זו. ניקח את התת סדרה המתאימה לאיבר זה. תת סדרה זו אם כן תתכנס לגבול של
+\[\series{a_{m_n}}{n}, \series{a_{k_n}}{n}\]
+בהתאמה. אך מכיוון שסדרה זו היא תת סדרה של סדרה המתכנסת ל
+$c$
+נקבל ש 
+$c$
+היא אחת מהגבולות של 
+\[\series{a_{m_n}}{n}, \series{a_{k_n}}{n}\]
+כלומר 
+$c\in\{a, b\}$. 
+לכן קבוצת הגבולות החלקיים היא 
+$\{a, b\}$
+\item 
+נשים לב כי ניתן לחלק את הסדרה באופן הבא
+\[a_n = \begin{cases}\frac{n}{n+1}, & n=4k \\ -\frac{n}{n+1}, & n=4k-2 \\ \sqrt[n]{\left(\left(1+\frac{1}{n}\right)^n\right)^n + 2^n}+\frac{\sin}{n}, & n=2k-1\end{cases}\]
+נשים לב כי עבור ה2 תתי מקרים הראשונים הגבולות החלקיים הם 
+$\pm 1$. 
+נמצא את הגבול של המקרה השלישי. קודם כל נשים לב כי 
+\[-\frac{1}{n}<\frac{\sin}{n}<\frac{1}{n}\]
+ומכיוון ש2 הסדרות מימין ומשמאל מכתנסות ל0 נקבל מסנדוויץ' כי 
+\[\frac{\sin}{n}\goesto 0\]
+עכשיו נמצא את הגבול של 
+\[\sqrt[n]{\left(\left(1+\frac{1}{n}\right)^n\right)^n + 2^n}\]
+נשים לב כי לפי מה שראינו בהרצאה כי
+\[\left(1+\frac{1}{n}\right)^n \geq 2\]
+ולכן 
+\[\sqrt[n]{\left(\left(1+\frac{1}{n}\right)^n\right)^n}<\sqrt[n]{\left(\left(1+\frac{1}{n}\right)^n\right)^n + 2^n} \leq \sqrt[n]{2\left(\left(1+\frac{1}{n}\right)^n\right)^n}\]
+נשים לב כי 2 הסדרות בקצוות האי-שיוויון מתכנסות ל 
+$e$
+ולכן מסנדוויץ' נקבל כי הסדרה המקורית מתכנסת ל 
+$e$.
+סך הכל קבוצת הגבולות החלקיים (עם שימוש של סעיף א' למקרה של 3 תתי סדרות) הן 
+\[\{\pm 1, e\}\]
+\end{enumerate}
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
